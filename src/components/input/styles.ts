@@ -10,7 +10,7 @@ export const InputField = styled.TextInput`
     font-size: 16px;
     height: 54px;
     border-radius: 6px;
-    width: 271px;
+    width: 300px;
     color: #fff;
     padding-left: 10px;
     border-color: ${ ( props: InputFieldProps ) => props.focusable ? theme.colors.purple_dark  : '' };
