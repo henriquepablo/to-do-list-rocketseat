@@ -36,7 +36,7 @@ function Home() {
 
         setToDoList(prevState => prevState.filter((item, i) => i !== index));
 
-        setCount(count - 1);
+        if (count > 0) setCount(count - 1);
     }
 
     const completeToDo = (index: number) => {
