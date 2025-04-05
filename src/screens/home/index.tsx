@@ -1,10 +1,11 @@
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import { theme } from "../../styles";
 import Header from "../../components/header";
 import { Container, ContainerQuantity, ContainerText, HorizontalInput, HorizontalQuantity, TextCreated, TextFinished, TextQuantity } from "./style";
 import Input from "../../components/input";
 import Button from "../../components/button";
 import { useState } from "react";
+import ListEmpty from "../../components/listEmpty";
 
 
 function Home() {
@@ -43,6 +44,13 @@ function Home() {
                         </ContainerQuantity>
                 </ContainerText>
             </HorizontalQuantity>
+
+            <FlatList 
+                data={[]}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={() => null}
+                ListEmptyComponent={ <ListEmpty /> }
+            />
         </Container>
     )
 }
