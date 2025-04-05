@@ -1,6 +1,10 @@
 import styled from "styled-components/native";
 import { theme } from "../../styles";
 
+type TextProps = {
+    complete: boolean;
+}
+
 export const Container = styled.View`
     margin-left: 24px;
     margin-right: 24px;
@@ -19,6 +23,7 @@ export const Text = styled.Text`
     color: ${ theme.colors.gray_100 };
     font-weight: bold;
     width: 235px;
+    text-decoration: ${(props : TextProps ) => props.complete ? 'line-through' : 'none'};
 `;
 
 export const Button = styled.TouchableOpacity`

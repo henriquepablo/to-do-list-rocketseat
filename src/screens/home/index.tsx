@@ -1,29 +1,58 @@
-import { Alert, FlatList, View } from "react-native";
+import { Alert, FlatList } from "react-native";
 import { theme } from "../../styles";
 import Header from "../../components/header";
 import { Container, ContainerQuantity, ContainerText, HorizontalInput, HorizontalQuantity, TextCreated, TextFinished, TextQuantity } from "./style";
 import Input from "../../components/input";
 import Button from "../../components/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ListEmpty from "../../components/listEmpty";
 import Card from "../../components/card";
 
+
+type ToDoListProps = {
+    text: string;
+    completed: boolean;
+}
 
 function Home() {
 
     const [ focused, setFocused ] = useState<boolean>(false);
 
-    const [ toDoList, setToDoList ] = useState<string[]>([]);
+    const [ toDoList, setToDoList ] = useState<ToDoListProps[]>([]);
+
+    const [ count, setCount ] = useState<number>(0);
 
     const [ text, setText ] = useState<string>('');
 
     const addToDoInList = () => {
         if (text === '') return Alert.alert('Tarefa', 'Adicione uma tarfe válida');
 
-        setToDoList(prevState => [...prevState, text]);
+        setToDoList(prevState => [...prevState, { text, completed: false }]);
 
         updateInput();
     }
+
+    const deleteToDo = (index: number) => {
+
+        setToDoList(prevState => prevState.filter((item, i) => i !== index));
+
+        setCount(count - 1);
+    }
+
+    const completeToDo = (index: number) => {
+
+        setToDoList(prevState => {
+            const updatedList = prevState.map((task, i) => 
+                i === index ? { ...task, completed: !task.completed } : task
+            );
+            
+            const completedTasksCount = updatedList.filter(task => task.completed).length;
+            
+            setCount(completedTasksCount);
+            
+            return updatedList;
+        });
+    };
 
     const updateInput = () => {
         setText('');
@@ -63,7 +92,7 @@ function Home() {
                     </TextFinished>                
                     <ContainerQuantity>
                         <TextQuantity>
-                            0
+                            { count }
                         </TextQuantity>
                         </ContainerQuantity>
                 </ContainerText>
@@ -72,7 +101,7 @@ function Home() {
             <FlatList 
                 data={toDoList}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={() => <Card />}
+                renderItem={({ item, index }) => <Card text={ item.text } completeToDo={() => completeToDo(index)} deletetToDo={() => deleteToDo(index) }/> }
                 ListEmptyComponent={ <ListEmpty /> }
             />
         </Container>
