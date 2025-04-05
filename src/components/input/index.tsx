@@ -1,8 +1,11 @@
 import { InputField } from "./styles";
+import { TextInputProps } from "react-native";
 
-function Input() {
+type InputProps = TextInputProps & {}
+
+function Input( { ...rest } : InputProps) {
     return(
-        <InputField />
+        <InputField {...rest} />
     );
 }
 

@@ -5,7 +5,7 @@ export const Container = styled.View`
     justify-content: center;
     align-items: center;
     background-color: ${ theme.colors.gray_700 };
-    height: 173px;
+    height: 113px;
 `;
 
 export const Logo = styled.Image`
