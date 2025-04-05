@@ -6,6 +6,7 @@ import Input from "../../components/input";
 import Button from "../../components/button";
 import { useState } from "react";
 import ListEmpty from "../../components/listEmpty";
+import Card from "../../components/card";
 
 
 function Home() {
@@ -46,9 +47,9 @@ function Home() {
             </HorizontalQuantity>
 
             <FlatList 
-                data={[]}
+                data={['']}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={() => null}
+                renderItem={() => <Card />}
                 ListEmptyComponent={ <ListEmpty /> }
             />
         </Container>
