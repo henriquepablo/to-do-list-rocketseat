@@ -1,14 +1,18 @@
 import { View } from "react-native";
 import { theme } from "../../styles";
 import Header from "../../components/header";
+import { Container } from "./style";
+import Input from "../../components/input";
 
 
 function Home() {
 
     return(
-        <View style={{flex: 1, backgroundColor: theme.colors.gray_600}}>
+        <Container>
             <Header />
-        </View>
+
+            <Input />
+        </Container>
     )
 }
 
